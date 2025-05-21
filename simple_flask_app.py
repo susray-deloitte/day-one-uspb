@@ -32,7 +32,11 @@ class MyApp:
         # Function to demonstrate Jinja2 template rendering
         @app.get('/jinja')
         def jinja_demo():
-            return render_template('index.html', **self.data)
+            try:
+                return render_template('index.html', **self.data)
+            except Exception as e:
+                logger.error(f"Error rendering template: {e}")
+                return "An error occurred while rendering the template."
     
     def run(self):
         try:
